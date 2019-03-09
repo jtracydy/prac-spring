@@ -23,6 +23,10 @@
     <bean id="factoryService" factory-bean="factory" factory-method="getFactoryService"></bean>
 
 
+    <!-- 自定义bean-->
+    <bean id="springInitBean" class="com.example.text.bean.definebean.SpringInitBean" init-method="init" destroy-method="cleanUp"></bean>
+    <bean id="springPostInit" class="com.example.text.bean.definebean.SpringPostInit" ></bean>
+
     <!--<bean id="beanPostProcessor" class="com.example.text.example.MyBeanPostProcessor">-->
     <!--</bean>-->
     <!--<bean id="instantiationAwareBeanPostProcessor" class="com.example.text.example.MyInstantiationAwareBeanPostProcessor">-->

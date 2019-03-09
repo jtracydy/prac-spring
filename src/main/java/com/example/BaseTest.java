@@ -3,6 +3,7 @@
 */
 package com.example;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -17,4 +18,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @WebAppConfiguration
 @ContextConfiguration(locations={"classpath:dispatcher-servlet.xml"})
 public class BaseTest {
+
+    @Test
+    public void test(){
+
+    }
 }

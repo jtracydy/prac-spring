@@ -13,6 +13,8 @@ import com.example.text.bean.static_factory.FactoryService;
 
 public class ClientController {
 
+    String str = "asdf";
+
     private ClientService clientService;
 
     private ClientConstruct clientConstruct;
@@ -56,5 +58,10 @@ public class ClientController {
 
     public void testFactoryService(){
         factoryService.get();
+    }
+
+
+    public void out(){
+        System.out.println("out...........");
     }
 }
