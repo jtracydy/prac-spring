@@ -18,6 +18,6 @@ public class TestA extends BaseTest {
 
     @Test
     public void testApect() {
-        bService.barB("testm",1);
+        bService.barB("testm",2);
     }
 }
