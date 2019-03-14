@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationContext;
 import javax.annotation.Resource;
 
 /**
+ * bean相关类的实例
  * @author wangdan Date: 2019/3/9 Time: 10:42
  * @version $Id$
  */

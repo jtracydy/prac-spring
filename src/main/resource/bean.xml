@@ -1,47 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:lang="http://www.springframework.org/schema/lang"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- 四种方式注入bean-->
-    <bean name="clientController" class="com.example.text.bean.ClientController">
-        <property name="clientService" ref="clientService"></property>
-        <constructor-arg name="clientConstruct" ref="clientConstruct"></constructor-arg>
-        <property name="factoryDao" ref="factoryDao"></property>
-        <property name="factoryService" ref="factoryService"></property>
-    </bean>
+    <!--<bean name="clientController" class="com.example.text.bean.ClientController">-->
+    <!--<property name="clientService" ref="clientService"></property>-->
+    <!--<constructor-arg name="clientConstruct" ref="clientConstruct"></constructor-arg>-->
+    <!--<property name="factoryDao" ref="factoryDao"></property>-->
+    <!--<property name="factoryService" ref="factoryService"></property>-->
+    <!--</bean>-->
 
     <!-- set方法初始化bean -->
-    <bean id = "clientService" class="com.example.text.bean.ClientService"></bean>
+    <!--<bean id="clientService" class="com.example.text.bean.ClientService"></bean>-->
     <!-- 构造方法初始haunt-->
-    <bean id = "clientConstruct" class="com.example.text.bean.ClientConstruct"></bean>
+    <!--<bean id="clientConstruct" class="com.example.text.bean.ClientConstruct"></bean>-->
 
     <!-- 静态工厂初始化bean-->
-    <bean name="factoryDao" class="com.example.text.bean.static_factory.Factory" factory-method="getStaticFactoryDao"></bean>
+    <!--<bean name="factoryDao" class="com.example.text.bean.static_factory.Factory"-->
+    <!--factory-method="getStaticFactoryDao"></bean>-->
     <!-- 实例工厂初始化bean-->
-    <bean name="factory" class="com.example.text.bean.static_factory.Factory"></bean>
-    <bean id="factoryService" factory-bean="factory" factory-method="getFactoryService"></bean>
+    <!--<bean name="factory" class="com.example.text.bean.static_factory.Factory"></bean>-->
+    <!--<bean id="factoryService" factory-bean="factory" factory-method="getFactoryService"></bean>-->
 
 
-    <!-- 自定义bean-->
-    <bean id="springInitBean" class="com.example.text.bean.definebean.SpringInitBean" init-method="init" destroy-method="cleanUp"></bean>
-    <bean id="springPostInit" class="com.example.text.bean.definebean.SpringPostInit" ></bean>
+    <!--自定义bean 一些初始化方法的使用-->
+    <!--<bean id="springInitBean" class="com.example.text.bean.definebean.SpringInitBean" init-method="init"-->
+    <!--destroy-method="cleanUp"></bean>-->
+    <!--<bean id="springPostInit" class="com.example.text.bean.definebean.SpringPostInit"></bean>-->
+    <!--<bean id="beanAware" class="com.example.text.bean.definebean.BeanAware"></bean>-->
+    <!--<bean id="beanAwareFactory" class="com.example.text.bean.definebean.BeanAwareFactory"></bean>-->
 
-
-    <bean id="myJavaBean" class="com.example.text.bean.bean1_8.MyJavaBean" init-method="initMethod">
-        <property name="desc" value="原始的描述信息" />
-        <property name="remark" value="原始的备注信息" />
-    </bean>
-
-    <bean id="myBeanPostProcessor" class="com.example.text.bean.bean1_8.MyBeanPostProcessor" />
-    <bean id="myBeanFactoryPostProcessor" class="com.example.text.bean.bean1_8.MyBeanFactoryPostProcessor" />
-
-    <!--<bean id="beanPostProcessor" class="com.example.text.example.MyBeanPostProcessor">-->
+    <!-- BeanPostProcessor -->
+    <!--<bean id="myJavaBean" class="com.example.text.bean.bean1_8.MyJavaBean" init-method="initMethod">-->
+    <!--<property name="desc" value="原始的描述信息" />-->
+    <!--<property name="remark" value="原始的备注信息" />-->
     <!--</bean>-->
-    <!--<bean id="instantiationAwareBeanPostProcessor" class="com.example.text.example.MyInstantiationAwareBeanPostProcessor">-->
+    <!--<bean id="myBeanPostProcessor" class="com.example.text.bean.bean1_8.MyBeanPostProcessor" />-->
+    <!--<bean id="myBeanFactoryPostProcessor" class="com.example.text.bean.bean1_8.MyBeanFactoryPostProcessor" />-->
+
+    <!-- bean生命周期 -->
+    <!--<bean id="person1" destroy-method="myDestroy"-->
+          <!--init-method="myInit" class="com.example.text.bean.life.Person">-->
+        <!--<property name="name">-->
+            <!--<value>jack</value>-->
+        <!--</property>-->
     <!--</bean>-->
-    <!--<bean id="beanFactoryPostProcessor" class="com.example.text.example.MyBeanFactoryPostProcessor">-->
-    <!--</bean>-->
-    <!--<bean id="person" class="com.example.text.example.Person" init-method="myInit" destroy-method="myDestory" scope="singleton" p:name="张三" p:address="广州" p:phone="15900000000"/>-->
+
+    <!--&lt;!&ndash; 配置自定义的后置处理器 &ndash;&gt;-->
+    <!--<bean id="postProcessor" class="com.example.text.bean.life.MyBeanPostProcessor"/>-->
+
+    <!-- aop-->
+    <aop:config>
+    <aop:aspect id="TestAspect" ref="aspectBean">
+    <!--配置com.spring.service包下所有类或接口的所有方法-->
+    <aop:pointcut id="businessService" expression="execution(* com.example.text.aop.example.*.*(..))" />
+    <aop:before pointcut-ref="businessService" method="doBefore"/>
+    <aop:after pointcut-ref="businessService" method="doAfter"/>
+    <aop:around pointcut-ref="businessService" method="doAround"/>
+    <aop:after-throwing pointcut-ref="businessService" method="doThrowing" throwing="ex"/>
+    </aop:aspect>
+    </aop:config>
+
+    <bean id="aspectBean" class="com.example.text.aop.example.TestAspect" />
+    <bean id="aService" class="com.example.text.aop.example.AServiceImpl"></bean>
+    <bean id="bService" class="com.example.text.aop.example.BServiceImpl"></bean>
+
 </beans>

@@ -4,10 +4,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- 注入属性-->
-    <bean id="dataSource" class="com.example.text.bean.divalue.DataSource">
-        <property name="pwd" value="123"></property>
-        <property name="name" value="llll"></property>
-    </bean>
+    <!--<bean id="dataSource" class="com.example.text.bean.divalue.DataSource">-->
+        <!--<property name="pwd" value="123"></property>-->
+        <!--<property name="name" value="llll"></property>-->
+    <!--</bean>-->
 
     <!--<bean id="dataSource1" class="com.example.text.bean.divalue.DataSource" p:name="123"></bean>-->
 </beans>

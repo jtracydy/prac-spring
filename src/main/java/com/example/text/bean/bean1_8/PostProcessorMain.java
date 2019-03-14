@@ -7,6 +7,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
+ *
+ * BeanFactoryPostProcessor
  * @author wangdan Date: 2019/3/13 Time: 15:55
  * @version $Id$
  */
